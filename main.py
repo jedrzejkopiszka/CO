@@ -14,13 +14,20 @@
 import Library
 import Book
 
-LIBRARIES = []
+libraries = []
 
-num_of_books, number_of_libraries, time = map(int, input().split())
-scores_of_books = list(map(int, input().split()))
 
-for library in range(number_of_libraries):
-    b, time, per_day = map(int, input().split())  # Kod wczytujący dane, przebia je na ksiązki i biblioteki
-    books_in_library = list(map(int, input().split()))  #
-    books = [Book.Book(book, scores_of_books[book]) for book in books_in_library]  #
-    LIBRARIES.append(Library.Library(library, books, time, per_day))  #
+def read_from_file(file_name):
+
+    file = open(file_name, 'r').readlines()
+
+    map(int, file[2].split()))
+    scores_of_books = list(map(int, file[1].split()))
+    #
+    # for library in range(number_of_libraries):
+    #     b, time, per_day = map(int, input().split())  # Kod wczytujący dane, przebia je na ksiązki i biblioteki
+    #     books_in_library = list(map(int, input().split()))  #
+    #     books = [Book.Book(book, scores_of_books[book]) for book in books_in_library]  #
+    #     libraries.append(Library.Library(library, books, time, per_day))  #
+
+read_from_file('input_file.txt')
