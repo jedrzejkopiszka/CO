@@ -28,9 +28,9 @@ def read_from_file(file_name):
         line += 2
 
         books = [Book.Book(book, scores_of_books[book]) for book in books_in_library]
-        libraries.append(Library.Library(library, num_of_books_in_lib, sign_up_time, books_per_day))
+        libraries.append(Library.Library(library, books_in_library, sign_up_time, num_of_books_in_lib, books_per_day))
 
 
 libraries = []
 read_from_file('input_file.txt')
-
+print(libraries[0])
