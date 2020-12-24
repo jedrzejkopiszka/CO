@@ -1,4 +1,3 @@
-# Znalazłem jakies linki do githuba z tym problemem:
 # https://github.com/rgab1508/hashcode
 # https://github.com/Brinfer/HashCode-2020/blob/main/src/QualificationRound/Class/Library.py
 # https://github.com/pgimalac/hashcode-evaluator/tree/master/2020-qualification-round
@@ -14,20 +13,24 @@
 import Library
 import Book
 
-libraries = []
-
 
 def read_from_file(file_name):
 
     file = open(file_name, 'r').readlines()
 
-    map(int, file[2].split()))
+    num_of_books, num_of_libraries, max_time = map(int, file[0].split())
     scores_of_books = list(map(int, file[1].split()))
-    #
-    # for library in range(number_of_libraries):
-    #     b, time, per_day = map(int, input().split())  # Kod wczytujący dane, przebia je na ksiązki i biblioteki
-    #     books_in_library = list(map(int, input().split()))  #
-    #     books = [Book.Book(book, scores_of_books[book]) for book in books_in_library]  #
-    #     libraries.append(Library.Library(library, books, time, per_day))  #
 
+    line = 2
+    for library in range(num_of_libraries):
+        num_of_books_in_lib, sign_up_time, books_per_day = map(int, file[line].split())
+        books_in_library = list(map(int, file[line+1].split()))
+        line += 2
+
+        books = [Book.Book(book, scores_of_books[book]) for book in books_in_library]
+        libraries.append(Library.Library(library, num_of_books_in_lib, sign_up_time, books_per_day))
+
+
+libraries = []
 read_from_file('input_file.txt')
+

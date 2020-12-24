@@ -5,7 +5,7 @@ class Library:
         self.sign_up_time = sign_up_time  # the time in days that it takes to sign the library up for scanning,
         self.books_per_day = books_per_day  # the number of books that can be scanned each day from the library once
                                      # the library is signed up
-        self.possible_score()  # maximum possible score
+        # self.possible_score()  # maximum possible score
 
     def __str__(self):
         return "Library ID: %d\n " \
@@ -17,8 +17,8 @@ class Library:
                 self.sign_up_time,
                 self.books_per_day)
 
-    def possible_score(self):  # returns the maximum possible score
-        pos_score = 0
-        for book in self.set_of_books:
-            pos_score += book.score
-        return pos_score
+    # def possible_score(self):  # returns the maximum possible score
+    #     pos_score = 0
+    #     for book in range(self.set_of_books):
+    #         pos_score += book.score
+    #     return pos_score
