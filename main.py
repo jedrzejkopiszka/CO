@@ -1,6 +1,9 @@
 # https://github.com/rgab1508/hashcode
 # https://github.com/Brinfer/HashCode-2020/blob/main/src/QualificationRound/Class/Library.py
 # https://github.com/pgimalac/hashcode-evaluator/tree/master/2020-qualification-round
+# https://towardsdatascience.com/google-hash-code-2020-a-greedy-approach-2dd4587b6033
+# https://www.linkedin.com/pulse/google-hash-code-2020-discussing-my-solution-scored-223-prateek/?articleId=6641016885955657728
+
 
 # TEST INPUT DATA:
 # 6 2 7  - books, libraries, deadline
