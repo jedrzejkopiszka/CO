@@ -34,8 +34,10 @@ def read_from_file(file_name):
         books = [Book.Book(book, scores_of_books[book]) for book in books_in_library]
         libraries.append(Library.Library(library, books_in_library, sign_up_time, num_of_books_in_lib, books_per_day))
 
+    return num_of_books, num_of_libraries, max_time, scores_of_books
 
-def get_best_books(library, books_scanned, current_time):
+
+def get_best_books(library, books_scanned, current_time, max_time, scores_of_books):
     time = max_time - library.sign_up_time - current_time
 
     sorted_books = sorted(library.books - books_scanned, key=lambda b: -scores_of_books[b])
@@ -43,43 +45,56 @@ def get_best_books(library, books_scanned, current_time):
     return list(sorted_books)[:time*library.books_per_day]
 
 
-def score(library, books_scanned, current_time, libraries_signed):
+def score(library, books_scanned, current_time, libraries_signed, max_time, scores_of_books):
     if library in libraries_signed:
         return float('-inf')
 
-    possible_books = get_best_books(library, books_scanned, current_time)
+    possible_books = get_best_books(library, books_scanned, current_time, max_time, scores_of_books)
 
     score = sum([scores_of_books[book_id] for book_id in possible_books])
     score /= library.sign_up_time
 
     return score
 
-def schedule():
+
+def schedule(libraries, max_time, scores_of_books):
+    results_books = results_libraries = []
+    libraries_signed = set()
+    books_scanned = set()
+    current_time = 0
+
     for iteration in range(len(libraries)):
-    scores = [score(library, books_scanned, current_time, libraries_signed) for library in libraries]
+        scores = [score(library,
+                        books_scanned,
+                        current_time,
+                        libraries_signed,
+                        max_time,
+                        scores_of_books) for library in libraries]
 
-    best_library = scores.index(max(scores))
+        best_library = scores.index(max(scores))
 
-    best_books = get_best_books(libraries[best_library], books_scanned, current_time)
+        best_books = get_best_books(libraries[best_library], books_scanned, current_time, max_time, scores_of_books)
 
-    if best_library in libraries_signed:
-        break
+        if best_library in libraries_signed:
+            break
 
-    current_time += libraries[best_library].sign_up_time
+        current_time += libraries[best_library].sign_up_time
 
-    if current_time >= max_time:
-        break
+        if current_time >= max_time:
+            break
 
-    results_books.append(best_books)
-    results_libraries.append(best_library)
+        results_books.append(best_books)
+        results_libraries.append(best_library)
 
-    books_scanned = books_scanned.union(set(best_books))
-    libraries_signed.add(libraries[best_library])
-    
+        books_scanned = books_scanned.union(set(best_books))
+        libraries_signed.add(libraries[best_library])
 
-num_of_books = num_of_libraries = max_time = None
-scores_of_books = None
+    return results_books, results_libraries
+
 
 libraries = []
-read_from_file('input_file.txt')
-print(libraries[0])
+num_of_books, num_of_libraries, max_time, scores_of_books = read_from_file('input_file.txt')
+schedule(libraries, max_time, scores_of_books)
+
+
+
